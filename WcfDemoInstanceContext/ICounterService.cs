@@ -15,6 +15,6 @@ namespace WcfDemoInstanceContext
         [OperationContract]
         [FaultContract(typeof(AmountTooSmallException))]
         [FaultContract(typeof(AmountTooLargeException))]
-        Task IncreaseCounter(int amount);
+        Task<CounterInfo> IncreaseCounter(int amount);
     }
 }

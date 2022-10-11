@@ -9,17 +9,156 @@
 //------------------------------------------------------------------------------
 
 namespace DemoClient.CounterServiceRef {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CounterInfo", Namespace="http://schemas.datacontract.org/2004/07/WcfDemoInstanceContext")]
+    [System.SerializableAttribute()]
+    public partial class CounterInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AmountTooSmallException", Namespace="http://schemas.datacontract.org/2004/07/WcfDemoInstanceContext")]
+    [System.SerializableAttribute()]
+    public partial class AmountTooSmallException : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AmountTooLargeException", Namespace="http://schemas.datacontract.org/2004/07/WcfDemoInstanceContext")]
+    [System.SerializableAttribute()]
+    public partial class AmountTooLargeException : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CounterServiceRef.ICounterService")]
     public interface ICounterService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICounterService/IncreaseCounter", ReplyAction="http://tempuri.org/ICounterService/IncreaseCounterResponse")]
-        void IncreaseCounter(int amount);
+        [System.ServiceModel.FaultContractAttribute(typeof(DemoClient.CounterServiceRef.AmountTooSmallException), Action="http://tempuri.org/ICounterService/IncreaseCounterAmountTooSmallExceptionFault", Name="AmountTooSmallException", Namespace="http://schemas.datacontract.org/2004/07/WcfDemoInstanceContext")]
+        [System.ServiceModel.FaultContractAttribute(typeof(DemoClient.CounterServiceRef.AmountTooLargeException), Action="http://tempuri.org/ICounterService/IncreaseCounterAmountTooLargeExceptionFault", Name="AmountTooLargeException", Namespace="http://schemas.datacontract.org/2004/07/WcfDemoInstanceContext")]
+        DemoClient.CounterServiceRef.CounterInfo IncreaseCounter(int amount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICounterService/IncreaseCounter", ReplyAction="http://tempuri.org/ICounterService/IncreaseCounterResponse")]
-        System.Threading.Tasks.Task IncreaseCounterAsync(int amount);
+        System.Threading.Tasks.Task<DemoClient.CounterServiceRef.CounterInfo> IncreaseCounterAsync(int amount);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,11 +188,11 @@ namespace DemoClient.CounterServiceRef {
                 base(binding, remoteAddress) {
         }
         
-        public void IncreaseCounter(int amount) {
-            base.Channel.IncreaseCounter(amount);
+        public DemoClient.CounterServiceRef.CounterInfo IncreaseCounter(int amount) {
+            return base.Channel.IncreaseCounter(amount);
         }
         
-        public System.Threading.Tasks.Task IncreaseCounterAsync(int amount) {
+        public System.Threading.Tasks.Task<DemoClient.CounterServiceRef.CounterInfo> IncreaseCounterAsync(int amount) {
             return base.Channel.IncreaseCounterAsync(amount);
         }
     }

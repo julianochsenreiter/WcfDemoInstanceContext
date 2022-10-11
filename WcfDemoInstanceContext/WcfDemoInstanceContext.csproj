@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AmountTooLargeException.cs" />
     <Compile Include="AmountTooSmallException.cs" />
+    <Compile Include="CounterInfo.cs" />
     <Compile Include="CounterService.cs" />
     <Compile Include="ICounterService.cs" />
     <Compile Include="Program.cs" />
