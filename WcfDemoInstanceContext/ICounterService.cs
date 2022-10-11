@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WcfDemoInstanceContext
 {
@@ -12,6 +13,8 @@ namespace WcfDemoInstanceContext
     public interface ICounterService
     {
         [OperationContract]
-        void IncreaseCounter(int amount);
+        [FaultContract(typeof(AmountTooSmallException))]
+        [FaultContract(typeof(AmountTooLargeException))]
+        Task IncreaseCounter(int amount);
     }
 }
