@@ -13,6 +13,7 @@ namespace WcfDemoInstanceContext
     public class CounterService : ICounterService
     {
         private int counter = 0;
+        private string currentUser;
         CounterInfo info = new CounterInfo("Counter1");
 
         public async Task<CounterInfo> IncreaseCounter(int amount)
@@ -29,6 +30,17 @@ namespace WcfDemoInstanceContext
             await Task.Delay(1000);
             Console.WriteLine("Counter: {0}", counter);
             return info;
+        }
+
+        public void Login(string username)
+        {
+            currentUser = username;
+            Console.WriteLine("Welcome " + username);
+        }
+
+        public void Logout()
+        {
+            Console.WriteLine("Goodbye" + currentUser);
         }
     }
 }

@@ -12,15 +12,19 @@ namespace DemoClient
         static void Main(string[] args)
         {
             CounterServiceClient client = new CounterServiceClient();
+            client.Login("Donald");
             client.IncreaseCounter(1);
             client.IncreaseCounter(1);
             client.IncreaseCounter(1);
+            client.Logout();
             client.IncreaseCounter(1);
             
             CounterServiceClient client2 = new CounterServiceClient();
+            client2.Login("Daisy");
             client2.IncreaseCounter(1);
             client2.IncreaseCounter(1);
             client2.IncreaseCounter(1);
+            client2.Logout();
             client2.IncreaseCounter(1);
 
             client.Close();

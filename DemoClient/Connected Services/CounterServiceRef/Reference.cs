@@ -149,16 +149,28 @@ namespace DemoClient.CounterServiceRef {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CounterServiceRef.ICounterService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CounterServiceRef.ICounterService", SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface ICounterService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICounterService/IncreaseCounter", ReplyAction="http://tempuri.org/ICounterService/IncreaseCounterResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICounterService/Login", ReplyAction="http://tempuri.org/ICounterService/LoginResponse")]
+        void Login(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICounterService/Login", ReplyAction="http://tempuri.org/ICounterService/LoginResponse")]
+        System.Threading.Tasks.Task LoginAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsInitiating=false, Action="http://tempuri.org/ICounterService/IncreaseCounter", ReplyAction="http://tempuri.org/ICounterService/IncreaseCounterResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(DemoClient.CounterServiceRef.AmountTooSmallException), Action="http://tempuri.org/ICounterService/IncreaseCounterAmountTooSmallExceptionFault", Name="AmountTooSmallException", Namespace="http://schemas.datacontract.org/2004/07/WcfDemoInstanceContext")]
         [System.ServiceModel.FaultContractAttribute(typeof(DemoClient.CounterServiceRef.AmountTooLargeException), Action="http://tempuri.org/ICounterService/IncreaseCounterAmountTooLargeExceptionFault", Name="AmountTooLargeException", Namespace="http://schemas.datacontract.org/2004/07/WcfDemoInstanceContext")]
         DemoClient.CounterServiceRef.CounterInfo IncreaseCounter(int amount);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICounterService/IncreaseCounter", ReplyAction="http://tempuri.org/ICounterService/IncreaseCounterResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsInitiating=false, Action="http://tempuri.org/ICounterService/IncreaseCounter", ReplyAction="http://tempuri.org/ICounterService/IncreaseCounterResponse")]
         System.Threading.Tasks.Task<DemoClient.CounterServiceRef.CounterInfo> IncreaseCounterAsync(int amount);
+        
+        [System.ServiceModel.OperationContractAttribute(IsTerminating=true, IsInitiating=false, Action="http://tempuri.org/ICounterService/Logout", ReplyAction="http://tempuri.org/ICounterService/LogoutResponse")]
+        void Logout();
+        
+        [System.ServiceModel.OperationContractAttribute(IsTerminating=true, IsInitiating=false, Action="http://tempuri.org/ICounterService/Logout", ReplyAction="http://tempuri.org/ICounterService/LogoutResponse")]
+        System.Threading.Tasks.Task LogoutAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -188,12 +200,28 @@ namespace DemoClient.CounterServiceRef {
                 base(binding, remoteAddress) {
         }
         
+        public void Login(string username) {
+            base.Channel.Login(username);
+        }
+        
+        public System.Threading.Tasks.Task LoginAsync(string username) {
+            return base.Channel.LoginAsync(username);
+        }
+        
         public DemoClient.CounterServiceRef.CounterInfo IncreaseCounter(int amount) {
             return base.Channel.IncreaseCounter(amount);
         }
         
         public System.Threading.Tasks.Task<DemoClient.CounterServiceRef.CounterInfo> IncreaseCounterAsync(int amount) {
             return base.Channel.IncreaseCounterAsync(amount);
+        }
+        
+        public void Logout() {
+            base.Channel.Logout();
+        }
+        
+        public System.Threading.Tasks.Task LogoutAsync() {
+            return base.Channel.LogoutAsync();
         }
     }
 }

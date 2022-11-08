@@ -55,11 +55,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Connected Services\CounterServiceRef\DemoClient.CounterServiceRef.CounterInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\CounterServiceRef\service.wsdl" />
     <None Include="Connected Services\CounterServiceRef\service.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\CounterServiceRef\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CounterServiceRef\WcfDemoInstanceContext.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

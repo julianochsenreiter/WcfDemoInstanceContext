@@ -32,10 +32,16 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/WcfDemoInstanceContext" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/WcfDemoInstanceContext" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="ICounterService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="ICounterService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
   <wsdl:message name="ICounterService_IncreaseCounter_InputMessage">
     <wsdl:part name="parameters" element="tns:IncreaseCounter" />
   </wsdl:message>
@@ -48,17 +54,40 @@
   <wsdl:message name="ICounterService_IncreaseCounter_AmountTooLargeExceptionFault_FaultMessage">
     <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/WcfDemoInstanceContext" name="detail" element="q2:AmountTooLargeException" />
   </wsdl:message>
-  <wsdl:portType name="ICounterService">
-    <wsdl:operation name="IncreaseCounter">
+  <wsdl:message name="ICounterService_Logout_InputMessage">
+    <wsdl:part name="parameters" element="tns:Logout" />
+  </wsdl:message>
+  <wsdl:message name="ICounterService_Logout_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogoutResponse" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="ICounterService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICounterService/Login" message="tns:ICounterService_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICounterService/LoginResponse" message="tns:ICounterService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="false" msc:isTerminating="false" name="IncreaseCounter">
       <wsdl:input wsaw:Action="http://tempuri.org/ICounterService/IncreaseCounter" message="tns:ICounterService_IncreaseCounter_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICounterService/IncreaseCounterResponse" message="tns:ICounterService_IncreaseCounter_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ICounterService/IncreaseCounterAmountTooSmallExceptionFault" name="AmountTooSmallExceptionFault" message="tns:ICounterService_IncreaseCounter_AmountTooSmallExceptionFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ICounterService/IncreaseCounterAmountTooLargeExceptionFault" name="AmountTooLargeExceptionFault" message="tns:ICounterService_IncreaseCounter_AmountTooLargeExceptionFault_FaultMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="false" msc:isTerminating="true" name="Logout">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICounterService/Logout" message="tns:ICounterService_Logout_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICounterService/LogoutResponse" message="tns:ICounterService_Logout_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ICounterService" type="tns:ICounterService">
     <wsp:PolicyReference URI="#NetTcpBinding_ICounterService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/ICounterService/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="IncreaseCounter">
       <soap12:operation soapAction="http://tempuri.org/ICounterService/IncreaseCounter" style="document" />
       <wsdl:input>
@@ -73,6 +102,15 @@
       <wsdl:fault name="AmountTooLargeExceptionFault">
         <soap12:fault use="literal" name="AmountTooLargeExceptionFault" namespace="" />
       </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap12:operation soapAction="http://tempuri.org/ICounterService/Logout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="CounterService">
